@@ -1,0 +1,7 @@
+Bug-Database: https://github.com/python/importlib_metadata/issues
+Bug-Submit: https://github.com/python/importlib_metadata/issues/new/choose
+Registry:
+  - Name: PyPI
+    Entry: importlib_metadata
+Repository: https://github.com/python/importlib_metadata.git
+Repository-Browse: https://github.com/python/importlib_metadata
