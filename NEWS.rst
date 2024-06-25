@@ -1,3 +1,306 @@
+v7.1.0
+======
+
+Features
+--------
+
+- Improve import time (python/cpython#114664).
+
+
+Bugfixes
+--------
+
+- Make MetadataPathFinder.find_distributions a classmethod for consistency with CPython. Closes #484. (#484)
+- Allow ``MetadataPathFinder.invalidate_caches`` to be called as a classmethod.
+
+
+v7.0.2
+======
+
+No significant changes.
+
+
+v7.0.1
+======
+
+Bugfixes
+--------
+
+- Corrected the interface for SimplePath to encompass the expectations of locate_file and PackagePath.
+- Fixed type annotations to allow strings.
+
+
+v7.0.0
+======
+
+Deprecations and Removals
+-------------------------
+
+- Removed EntryPoint access by numeric index (tuple behavior).
+
+
+v6.11.0
+=======
+
+Features
+--------
+
+- Added ``Distribution.origin`` supplying the ``direct_url.json`` in a ``SimpleNamespace``. (#404)
+
+
+v6.10.0
+=======
+
+Features
+--------
+
+- Added diagnose script. (#461)
+
+
+v6.9.0
+======
+
+Features
+--------
+
+- Added EntryPoints.__repr__ (#473)
+
+
+v6.8.0
+======
+
+Features
+--------
+
+- Require Python 3.8 or later.
+
+
+v6.7.0
+======
+
+* #453: When inferring top-level names that are importable for
+  distributions in ``package_distributions``, now symlinks to
+  other directories are honored.
+
+v6.6.0
+======
+
+* #449: Expanded type annotations.
+
+v6.5.1
+======
+
+* python/cpython#103661: Removed excess error suppression in
+  ``_read_files_egginfo_installed`` and fixed path handling
+  on Windows.
+
+v6.5.0
+======
+
+* #422: Removed ABC metaclass from ``Distribution`` and instead
+  deprecated construction of ``Distribution`` objects without
+  concrete methods.
+
+v6.4.1
+======
+
+* Updated docs with tweaks from upstream CPython.
+
+v6.4.0
+======
+
+* Consolidated some behaviors in tests around ``_path``.
+* Added type annotation for ``Distribution.read_text``.
+
+v6.3.0
+======
+
+* #115: Support ``installed-files.txt`` for ``Distribution.files``
+  when present.
+
+v6.2.1
+======
+
+* #442: Fixed issue introduced in v6.1.0 where non-importable
+  names (metadata dirs) began appearing in
+  ``packages_distributions``.
+
+v6.2.0
+======
+
+* #384: ``PackageMetadata`` now stipulates an additional ``get``
+  method allowing for easy querying of metadata keys that may not
+  be present.
+
+v6.1.0
+======
+
+* #428: ``packages_distributions`` now honors packages and modules
+  with Python modules that not ``.py`` sources (e.g. ``.pyc``,
+  ``.so``).
+
+v6.0.1
+======
+
+* #434: Expand protocol for ``PackageMetadata.get_all`` to match
+  the upstream implementation of ``email.message.Message.get_all``
+  in python/typeshed#9620.
+
+v6.0.0
+======
+
+* #419: Declared ``Distribution`` as an abstract class, enforcing
+  definition of abstract methods in instantiated subclasses. It's no
+  longer possible to instantiate a ``Distribution`` or any subclasses
+  unless they define the abstract methods.
+
+  Please comment in the issue if this change breaks any projects.
+  This change will likely be rolled back if it causes significant
+  disruption.
+
+v5.2.0
+======
+
+* #371: Deprecated expectation that ``PackageMetadata.__getitem__``
+  will return ``None`` for missing keys. In the future, it will raise a
+  ``KeyError``.
+
+v5.1.0
+======
+
+* #415: Instrument ``SimplePath`` with generic support.
+
+v5.0.0
+======
+
+* #97, #284, #300: Removed compatibility shims for deprecated entry
+  point interfaces.
+
+v4.13.0
+=======
+
+* #396: Added compatibility for ``PathDistributions`` originating
+  from Python 3.8 and 3.9.
+
+v4.12.0
+=======
+
+* py-93259: Now raise ``ValueError`` when ``None`` or an empty
+  string are passed to ``Distribution.from_name`` (and other
+  callers).
+
+v4.11.4
+=======
+
+* #379: In ``PathDistribution._name_from_stem``, avoid including
+  parts of the extension in the result.
+* #381: In ``PathDistribution._normalized_name``, ensure names
+  loaded from the stem of the filename are also normalized, ensuring
+  duplicate entry points by packages varying only by non-normalized
+  name are hidden.
+
+Note (#459): This change had a backward-incompatible effect for
+any installers that created metadata in the filesystem with dashes
+in the package names (not replaced by underscores).
+
+v4.11.3
+=======
+
+* #372: Removed cast of path items in FastPath, not needed.
+
+v4.11.2
+=======
+
+* #369: Fixed bug where ``EntryPoint.extras`` was returning
+  match objects and not the extras strings.
+
+v4.11.1
+=======
+
+* #367: In ``Distribution.requires`` for egg-info, if ``requires.txt``
+  is empty, return an empty list.
+
+v4.11.0
+=======
+
+* bpo-46246: Added ``__slots__`` to ``EntryPoints``.
+
+v4.10.2
+=======
+
+* #365 and bpo-46546: Avoid leaking ``method_name`` in
+  ``DeprecatedList``.
+
+v4.10.1
+=======
+
+v2.1.3
+=======
+
+* #361: Avoid potential REDoS in ``EntryPoint.pattern``.
+
+v4.10.0
+=======
+
+* #354: Removed ``Distribution._local`` factory. This
+  functionality was created as a demonstration of the
+  possible implementation. Now, the
+  `pep517 <https://pypi.org/project/pep517>`_ package
+  provides this functionality directly through
+  `pep517.meta.load <https://github.com/pypa/pep517/blob/a942316305395f8f757f210e2b16f738af73f8b8/pep517/meta.py#L63-L73>`_.
+
+v4.9.0
+======
+
+* Require Python 3.7 or later.
+
+v4.8.3
+======
+
+* #357: Fixed requirement generation from egg-info when a
+  URL requirement is given.
+
+v4.8.2
+======
+
+v2.1.2
+======
+
+* #353: Fixed discovery of distributions when path is empty.
+
+v4.8.1
+======
+
+* #348: Restored support for ``EntryPoint`` access by item,
+  deprecating support in the process. Users are advised
+  to use direct member access instead of item-based access::
+
+  - ep[0] -> ep.name
+  - ep[1] -> ep.value
+  - ep[2] -> ep.group
+  - ep[:] -> ep.name, ep.value, ep.group
+
+v4.8.0
+======
+
+* #337: Rewrote ``EntryPoint`` as a simple class, still
+  immutable and still with the attributes, but without any
+  expectation for ``namedtuple`` functionality such as
+  ``_asdict``.
+
+v4.7.1
+======
+
+* #344: Fixed regression in ``packages_distributions`` when
+  neither top-level.txt nor a files manifest is present.
+
+v4.7.0
+======
+
+* #330: In ``packages_distributions``, now infer top-level
+  names from ``.files()`` when a ``top-level.txt``
+  (Setuptools-specific metadata) is not present.
+
 v4.6.4
 ======
 
