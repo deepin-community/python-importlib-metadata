@@ -1,3 +1,32 @@
+python-importlib-metadata (7.1.0-1) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * Remove myself from Uploaders.
+
+  [ Boyuan Yang ]
+  * Add myself into the uploaders list.
+  * New upstream release.
+  * debian/control: Use dh-sequence-python3 as build-dependency.
+  * debian/control: Bump Standards-version to 4.7.0.
+  * debian/patches/:
+    + 0001-tests-compat-py39.py-Drop-py39compat-to-avoid-jaraco.patch:
+      Add patch to avoid using shim from external jaraco.test library.
+      Use import_helper and os_helper directly from stdlib test.support.
+      We do not need compatibility with python3.9 or earlier anyway.
+
+ -- Boyuan Yang <byang@debian.org>  Sat, 01 Jun 2024 22:16:04 -0400
+
+python-importlib-metadata (4.12.0-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream release.
+  * Drop d/patches/skip-test_find_local.patch, upstream code removed in new
+    release.
+  * Build-depend on pybuild-plugin-pyproject.
+  * Set Standards-Version to 4.6.1, no changes needed.
+
+ -- Emanuele Rocca <ema@debian.org>  Thu, 01 Sep 2022 14:28:13 +0200
+
 python-importlib-metadata (4.6.4-1) unstable; urgency=medium
 
   * Team upload.
